@@ -1,0 +1,8 @@
+samples: config/samples.tsv
+reads: config/reads.tsv
+ref: resources/scaffolds.fa
+
+# Set some program options
+bwa_mem_options:
+  sort: samtools
+
