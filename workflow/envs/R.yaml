@@ -1,0 +1,7 @@
+channels:
+  - conda-forge
+  - bioconda
+  - default
+dependencies:
+  - r-ggplot2
+  

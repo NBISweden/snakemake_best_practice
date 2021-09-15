@@ -1,0 +1,32 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+description: Read schema definition. List read files.
+type: object
+properties:
+  unit:
+    type: string
+    description: read set identifier
+  sample:
+    type: string
+    description: sample identifier. Must match sample in sample definition file
+  reads:
+    type: string
+    format: uri
+    description: fastq/sam/bam/cram file
+    pattern: .*(.fastq|.fastq.gz|.fq|.fq.gz|.sam|.bam|.cram)$
+  id:
+    type: integer
+    description: read identifier. For single-end reads equals 1.
+    enum: [1, 2]
+    default: 1
+  PU:
+    type: string
+    description: Platform unit (e.g. flowcell-barcode.lane for Illumina).
+  LANE:
+    type: [string, number]
+    description: Platform lane.
+
+required:
+  - unit
+  - sample
+  - id
+  - reads

@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+dependencies:
+  - python =3.8
+  - pandas
+  - jupyter =1.0
+  - jupyter_contrib_nbextensions
+  - jupyterlab_code_formatter =1.4

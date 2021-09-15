@@ -1,0 +1,47 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+
+description: >-
+  snakemake configuration file
+
+type: object
+
+# possible entries of the config file and which type they should be
+properties:
+  samples:
+    type: string
+    description: >-
+      Sample sheet file; see samples.schema.yaml for definitions of
+      sample sheet entries.
+  ref:
+    type: string
+    description: >-
+      Reference sequence in fasta format. Must end with .fasta or .fa.
+    pattern: .+\.(fasta|fa)$
+
+  bwa_mem_options:
+    type: object
+    default: {}
+    properties:
+      sort:
+        type: string
+        description: >-
+          bwa mem sorting order
+        default: none
+        enum: [none, picard, samtools]
+      sort_order:
+        type: string
+        default: coordinate
+        enum: [coordinate, queryname]
+
+  qc_multiqc:
+    type: object
+    default: {}
+    properties:
+      options:
+        type: string
+        default: ""
+
+# entries that have to be in the config file for successful validation
+required:
+  - samples
+  - ref

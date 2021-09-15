@@ -1,0 +1,37 @@
+##############################
+# Example Snakemake workflow following best practice guidelines
+#
+# The workflow has been initialized using snakemake-workflows
+# cookiecutter
+# (https://github.com/snakemake-workflows/cookiecutter-snakemake-workflow)
+# with the command 'cookiecutter
+# git@github.com:snakemake-workflows/cookiecutter-snakemake-workflow.git'
+#
+##############################
+
+report: "report/workflow.rst"
+
+##############################
+# Input collection functions
+#
+# The following snakefiles define input functions to rules
+##############################
+include: "rules/common.smk"
+include: "rules/inputfunctions.smk"
+
+# The first rule should define the default target files
+# Subsequent target rules can be specified below. They should
+# start with all_*.
+rule all:
+    input: unpack(all)
+
+rule all_map:
+    input: all_map_input
+
+rule all_qc:
+    input: unpack(all_qc)
+
+
+include: "rules/utils.smk"
+include: "rules/mapping.smk"
+include: "rules/qc.smk"
