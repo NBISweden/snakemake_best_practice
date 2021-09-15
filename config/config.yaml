@@ -1,0 +1,3 @@
+samples: "config/samples.tsv"
+reads: "config/reads.tsv"
+ref: "resources/reference.fasta"

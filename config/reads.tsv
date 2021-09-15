@@ -1,0 +1,5 @@
+unit	sample	reads	id
+u1	A	data/raw/A_1.fastq.gz	1
+u1	A	data/raw/A_2.fastq.gz	2
+u2	B	data/raw/B_1.fastq.gz	1
+u2	B	data/raw/B_2.fastq.gz	2

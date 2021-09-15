@@ -63,4 +63,5 @@ rule qc_notebook:
     output: html = "reports/qc/notebook.html"
     input: coverage = ["results/qc/samtools/{}.coverage.txt".format(x) for x in samples.index]
     conda: "../envs/jupyter.yaml"
+    log: "logs/qc/notebooks/notebook.log"
     notebook: "../notebooks/notebook.py.ipynb"
