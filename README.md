@@ -1,7 +1,7 @@
 # Snakemake workflow: Snakemake best practice
 
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.8.0-brightgreen.svg)](https://snakemake.bitbucket.io)
-[![test status](https://github.com/NBISweden/snakemake_best_practice/workflows/CI/badge.svg?branch=main)](https://github.com/NBISweden/snakemake_best_practice/actions?query=branch%3Amain+workflow%3ACI)
+[![Tests](https://github.com/NBISweden/snakemake_best_practice/actions/workflows/main.yaml/badge.svg)](https://github.com/NBISweden/snakemake_best_practice/actions/workflows/main.yaml)
 
 ## About
 
