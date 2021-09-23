@@ -9,7 +9,9 @@
 #
 ##############################
 
+
 report: "report/workflow.rst"
+
 
 ##############################
 # Input collection functions
@@ -19,17 +21,31 @@ report: "report/workflow.rst"
 include: "rules/common.smk"
 include: "rules/inputfunctions.smk"
 
+
 # The first rule should define the default target files
 # Subsequent target rules can be specified below. They should
 # start with all_*.
 rule all:
-    input: unpack(all)
+    input:
+        unpack(all),
 
+
+# Pseudo-target using expand
 rule all_map:
-    input: all_map_input
+    input:
+        expand("data/interim/map/bwa/{sample}.bam", sample=samples.index.tolist()),
 
+
+# Pseudo-target using an input function
+rule all_map_expand:
+    input:
+        all_map_input,
+
+
+# Use unpack to unpack a key to list mapping
 rule all_qc:
-    input: unpack(all_qc)
+    input:
+        unpack(all_qc),
 
 
 include: "rules/utils.smk"
