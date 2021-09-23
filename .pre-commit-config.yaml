@@ -10,6 +10,13 @@ repos:
     hooks:
       - id: black
   - repo: https://github.com/snakemake/snakefmt
-    rev: 0.4.2
+    rev: 0.4.3
     hooks:
       - id: snakefmt
+  - repo: local
+    hooks:
+      - id: lint
+        name: Snakemake lint
+        entry: snakemake --lint text
+        language: system
+        files: ''
