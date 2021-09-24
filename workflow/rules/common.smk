@@ -6,9 +6,13 @@
 from snakemake.utils import validate
 import pandas as pd
 
+# this container was created with the command "snakemake --containerize"
+# and contains all Conda environments used by the rules of this workflow
+containerized: "docker://verku-best-practice-smk"
+
 # this container defines the underlying OS for each job when using the workflow
 # with --use-conda --use-singularity
-container: "docker://continuumio/miniconda3"
+#container: "docker://continuumio/miniconda3"
 
 ##### load config and sample sheets #####
 configfile: "config/config.yaml"
