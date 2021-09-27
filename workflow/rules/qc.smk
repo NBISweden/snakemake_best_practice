@@ -113,3 +113,17 @@ rule qc_notebook:
         "logs/qc/notebooks/notebook.log",
     notebook:
         "../notebooks/notebook.py.ipynb"
+
+
+rule qc_rmarkdown:
+    """Run a rmardown script"""
+    output:
+        html="reports/qc/rmarkdown.html",
+    input:
+        coverage=[
+            "results/qc/samtools/{}.coverage.txt".format(x) for x in samples.index
+        ],
+    log:
+        "logs/qc/rmarkdown.log",
+    script:
+        "../scripts/rmarkdown.Rmd"

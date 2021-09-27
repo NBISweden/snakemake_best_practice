@@ -39,7 +39,7 @@ wildcard_constraints:
 ##############################
 def ref_basename():
     """Return the basename of the reference file"""
-    return os.path.splitext(os.path.basename(config["ref"]))[0]
+    return os.path.basename(config["ref"])
 
 
 def ref_dirname():

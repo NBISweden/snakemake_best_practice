@@ -1,3 +1,7 @@
 samples: "config/samples.tsv"
 reads: "config/reads.tsv"
 ref: "resources/reference.fasta"
+
+# Set some program options
+bwa_mem_options:
+  sort: samtools

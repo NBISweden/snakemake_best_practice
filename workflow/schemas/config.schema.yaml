@@ -12,6 +12,11 @@ properties:
     description: >-
       Sample sheet file; see samples.schema.yaml for definitions of
       sample sheet entries.
+  reads:
+    type: string
+    description: >-
+      Read file; see reads.schema.yaml for definitions of read
+      entries.
   ref:
     type: string
     description: >-
@@ -24,12 +29,12 @@ properties:
     properties:
       sort:
         type: string
-        description: >-
-          bwa mem sorting order
         default: none
         enum: [none, picard, samtools]
       sort_order:
         type: string
+        description: >-
+          bwa mem sorting order
         default: coordinate
         enum: [coordinate, queryname]
 
