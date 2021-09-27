@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Lint workflow
-      uses: snakemake/snakemake-github-action@v1.22.0
+      uses: snakemake/snakemake-github-action@v1
       with:
         directory: .
         snakefile: workflow/Snakefile
@@ -27,13 +27,14 @@ jobs:
     - name: Checkout submodules
       uses: textbook/git-checkout-submodule-action@2.0.0
     - name: Test workflow (local test data)
-      uses: snakemake/snakemake-github-action@v1.22.0
+      uses: snakemake/snakemake-github-action@v1
       with:
         directory: .test
         snakefile: workflow/Snakefile
         args: "--use-conda --show-failed-logs -j 10 --conda-cleanup-pkgs"
     - name: Test report
-      uses: snakemake/snakemake-github-action@v1.22.0
+      # v1 uses snakemake 6.8.1 which fails to generate report
+      uses: snakemake/snakemake-github-action@v1.21.0
       with:
         directory: .test
         snakefile: workflow/Snakefile
