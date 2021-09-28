@@ -53,6 +53,7 @@ rule map_bwa_mem:
         index=bwa_mem_index_input_ext,
         reads=map_sample_unit_input,
     resources:
+        mem_mb=2000,
         runtime=lambda wildcards, attempt: attempt
         * workflow.default_resources.parsed.get("runtime", 100),
     log:

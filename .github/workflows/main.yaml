@@ -33,7 +33,7 @@ jobs:
         snakefile: workflow/Snakefile
         args: "--use-conda --show-failed-logs -j 10 --conda-cleanup-pkgs"
     - name: Test report
-      # v1 uses snakemake 6.8.1 which fails to generate report
+      # v1.23.0 uses snakemake 6.8.1 which fails to generate report
       uses: snakemake/snakemake-github-action@v1.21.0
       with:
         directory: .test
