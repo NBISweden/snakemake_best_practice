@@ -9,16 +9,23 @@ rule map_bwa_index:
     envmodules directive defines a lua module in the uppmax module
     system.
     """
-    output: expand("{{ref}}{ext}", ext=[".amb", ".ann", ".bwt", ".pac", ".sa"])
-    input: config["ref"]
-    log: "logs/bwa/index/{ref}.log"
+    output:
+        expand(
+            "{{refdir}}/{{genome}}{ext}", ext=[".amb", ".ann", ".bwt", ".pac", ".sa"]
+        ),
+    input:
+        config["ref"],
+    log:
+        "logs/bwa/index/{refdir}/{genome}.log",
     resources:
-        runtime = 100
+        runtime=100,
     wildcard_constraints:
-        genome = ref_basename()
+        genome=ref_basename(),
+        refdir=ref_dirname(),
     envmodules:
-        "bwa/0.7.17"
-    conda: "../envs/bwa.yaml"
+        "bwa/0.7.17",
+    conda:
+        "../envs/bwa.yaml"
     threads: 1
     shell:
         "bwa index {input}"
@@ -40,22 +47,27 @@ rule map_bwa_mem:
     conda directive here. See
     https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/bwa/mem.html
     for more information."""
-    output: temp("data/interim/map/bwa/{sample}/{unit}.bam")
+    output:
+        temp("data/interim/map/bwa/{sample}/{unit}.bam"),
     input:
-        index = bwa_mem_index_input_ext,
-        reads = map_sample_unit_input
+        index=bwa_mem_index_input_ext,
+        reads=map_sample_unit_input,
     resources:
-        runtime = lambda wildcards, attempt: attempt * workflow.default_resources.parsed.get("runtime", 100)
-    log: "logs/bwa/{sample}/{unit}.log"
+        mem_mb=2000,
+        runtime=lambda wildcards, attempt: attempt
+        * workflow.default_resources.parsed.get("runtime", 100),
+    log:
+        "logs/bwa/{sample}/{unit}.log",
     envmodules:
-        "bwa/0.7.17"
+        "bwa/0.7.17",
     params:
         # Following parameters *must* be defined to comply with the
         # snakemake wrapper
-        index = config["ref"],
-        sort = config["bwa_mem_options"]["sort"],
-        sort_order = config["bwa_mem_options"]["sort_order"],
-        sort_extra = "",
-        extra = ""
+        index=config["ref"],
+        sort=config["bwa_mem_options"]["sort"],
+        sort_order=config["bwa_mem_options"]["sort_order"],
+        sort_extra="",
+        extra="",
     threads: 2
-    wrapper: "0.78.0/bio/bwa/mem"
+    wrapper:
+        "0.78.0/bio/bwa/mem"
