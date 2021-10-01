@@ -10,6 +10,7 @@
 ##############################
 
 pepfile: "pep/config.yaml"
+pepschema: "schemas/pep.schema.yaml"
 report: "report/workflow.rst"
 
 
