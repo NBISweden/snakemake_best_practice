@@ -9,7 +9,7 @@
 #
 ##############################
 
-
+pepfile: "pep/config.yaml"
 report: "report/workflow.rst"
 
 
@@ -20,7 +20,6 @@ report: "report/workflow.rst"
 ##############################
 include: "rules/common.smk"
 include: "rules/inputfunctions.smk"
-
 
 # The first rule should define the default target files
 # Subsequent target rules can be specified below. They should
