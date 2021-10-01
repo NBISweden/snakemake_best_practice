@@ -17,15 +17,9 @@ configfile: "config/config.yaml"
 
 
 validate(config, schema="../schemas/config.schema.yaml")
-
-samples = pd.read_csv(config["samples"], sep="\t").set_index("sample", drop=False)
-samples.index.names = ["sample_id"]
-validate(samples, schema="../schemas/samples.schema.yaml")
-
-reads = pd.read_csv(config["reads"], sep="\t").set_index("sample", drop=False)
-reads.index.names = ["sample_id"]
-validate(reads, schema="../schemas/reads.schema.yaml")
-
+samples = pep.sample_table
+reads = pep.subsample_table
+reads.set_index("sample_name", inplace=True, drop=False)
 
 ##### Global wildcard constraints: valid in all rules #####
 wildcard_constraints:
