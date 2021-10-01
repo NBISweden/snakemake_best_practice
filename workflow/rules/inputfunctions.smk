@@ -17,7 +17,9 @@ def bwa_mem_index_input_ext(wildcards):
 def map_sample_unit_input(wildcards):
     """Retrieve input to a mapping job for a given sample and unit"""
     df = reads.loc[wildcards.sample]
-    inputreads = sorted(df[df["unit"] == wildcards.unit].reads.values)
+    if isinstance(df, pd.Series):
+        df = pd.DataFrame(df).T
+    inputreads = sorted(df[df["unit"] == wildcards.unit].read1.values) + sorted(df[df["unit"] == wildcards.unit].read2.values)
     return inputreads
 
 
@@ -28,9 +30,13 @@ def picard_merge_sam_input(wildcards):
     sample-level bam file.
 
     """
-    df = reads.loc[wildcards.sample][["unit", "sample"]].drop_duplicates()
-    fn = "data/interim/map/bwa/{sample}/{unit}.bam"
-    bam = [fn.format(**x) for k, x in df.iterrows()]
+    df = reads.loc[wildcards.sample][["unit", "sample_name"]].drop_duplicates()
+    if isinstance(df, pd.Series):
+        units = [df.unit]
+    else:
+        units = df.unit.unique()
+    bam = [f"data/interim/map/bwa/{wildcards.sample}/{unit}.bam" for unit in units]
+    print(bam)
     return bam
 
 
@@ -50,7 +56,7 @@ def all_map_input(wildcards):
 
 def all_qc_fastqc(wildcards):
     fn = "results/qc/fastqc/{}_fastqc.zip"
-    files = [fn.format(x) for x in reads.reads.values]
+    files = [fn.format(x) for x in reads.read1.values] + [fn.format(x) for x in reads.read2.values]
     return files
 
 
