@@ -1,0 +1,39 @@
+description: A PEP schema for the project
+imports:
+  - http://schema.databio.org/pep/2.0.0.yaml
+properties:
+  samples:
+    type: array
+    items:
+      type: object
+      properties:
+        sample_name:
+          type: string
+          description: "Sample name/identifier"
+        population:
+          type: string
+          description: "Population name/identifier"
+        read1:
+          type: string
+          description: "Fastq file for read 1"
+          pattern: .*(.fastq|.fastq.gz|.fq|.fq.gz|.sam|.bam|.cram)$
+        read2:
+          type: string
+          description: "Fastq file for read 2"
+          pattern: .*(.fastq|.fastq.gz|.fq|.fq.gz|.sam|.bam|.cram)$
+        unit:
+          type: string
+          description: "Read set identifier"
+        PU:
+          type: string
+          description: "Platform unit (e.g. flowcell-barcode.lane for Illumina)"
+        LANE:
+          type: [ string, number ]
+          description: "Platform lane"
+      required:
+        - sample_name
+        - read1
+        - read2
+        - unit
+required:
+  - samples
