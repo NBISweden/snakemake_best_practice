@@ -36,7 +36,6 @@ def picard_merge_sam_input(wildcards):
     else:
         units = df.unit.unique()
     bam = [f"data/interim/map/bwa/{wildcards.sample}/{unit}.bam" for unit in units]
-    print(bam)
     return bam
 
 
